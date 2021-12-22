@@ -133,6 +133,7 @@ void main()
 	cout << "Введите значение добовляемого элемента: "; cin >> value;
 	list.insert(value, index);
 	list.print();
+	cout << "Введите индекс удаляемого элемента: "; cin >> index;
 	list.erase(index);
 	list.print();
 }
