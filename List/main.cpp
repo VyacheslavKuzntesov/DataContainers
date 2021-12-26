@@ -188,7 +188,6 @@ public:
 	}
 	List(const List& other) :List()
 	{
-		//for (Element* Temp = other.Head; Temp; Temp = Temp->pNext)push_back(Temp->Data);
 		*this = other;
 		cout << "CopyConstructor:" << this << endl;
 	}
@@ -242,10 +241,6 @@ public:
 			size++;
 			return;
 		}
-		/*Element* New = new Element(Data);
-		New->pPrev = Tail;
-		Tail->pNext = New;
-		Tail = New;*/
 		Tail = Tail->pNext = new Element(Data, nullptr, Tail);
 		size++;
 	}
@@ -324,12 +319,12 @@ public:
 		if (index < size / 2)
 		{
 			Temp = Head;
-			for (size_t i = 0; i < index; i++)Temp = Temp->pNext;
+			for (int i = 0; i < index; i++)Temp = Temp->pNext;
 		}
 		else
 		{
 			Temp = Tail;
-			for (size_t i = 0; i < size - index - 1; i++)Temp = Temp->pPrev;
+			for (int i = 0; i < size - index - 1; i++)Temp = Temp->pPrev;
 		}
 		Temp->pPrev->pNext = Temp->pNext;
 		Temp->pNext->pPrev = Temp->pPrev;
