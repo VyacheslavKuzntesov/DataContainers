@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 using namespace std;
 using std::cout;
 using std::cin;
@@ -252,7 +252,7 @@ public:
 	{
 		if (Index > size)
 		{
-			cout << "Error: Âûõîä çà ïðåäåëû ñïèñêà:" << endl;
+			cout << "Error: Ð’Ñ‹Ñ…Ð¾Ð´ Ð·Ð° Ð¿Ñ€ÐµÐ´ÐµÐ»Ñ‹ ÑÐ¿Ð¸ÑÐºÐ°:" << endl;
 			return;
 		}
 		if (Index == 0)
@@ -329,13 +329,13 @@ public:
 		{
 			cout << Temp << tab << Temp->pPrev << tab << Temp->Data << tab << Temp->pNext << endl;
 		}
-		cout << "Êîëè÷åñòâî ýëåìåíòîâ ñïèñêà: " << size << endl;
+		cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² ÑÐ¿Ð¸ÑÐºÐ°: " << size << endl;
 	}
 	void print_reverse()
 	{
 		for (Element* Temp = Tail; Temp; Temp = Temp->pPrev)
 			cout << Temp << tab << Temp->pPrev << tab << Temp->Data << tab << Temp->pNext << endl;
-		cout << "Êîëè÷åñòâî ýëåìåíòîâ ñïèñêà: " << size << endl;
+		cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² ÑÐ¿Ð¸ÑÐºÐ°: " << size << endl;
 	}
 };
 
@@ -353,7 +353,7 @@ void main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	int n;	cout << "Ââåäèòå ðàçìåð ñïèñêà: "; cin >> n;
+	int n;	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ñ€Ð°Ð·Ð¼ÐµÑ€ ÑÐ¿Ð¸ÑÐºÐ°: "; cin >> n;
 	List list;
 	for (int i = 0; i < n; i++) list.push_back(rand() % 100);
 	list.print();
@@ -361,12 +361,12 @@ void main()
 
 	int index;
 	int value;
-	cout << "Ââåäèòå çíà÷åíèå äîáàâëÿåìîãî ýëåìåíòà â íà÷àëî: "; cin >> value;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð² Ð½Ð°Ñ‡Ð°Ð»Ð¾: "; cin >> value;
 	list.push_front(value);
-	cout << "Ââåäèòå çíà÷åíèå äîáàâëÿåìîãî ýëåìåíòà â êîíåö: "; cin >> value;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° Ð² ÐºÐ¾Ð½ÐµÑ†: "; cin >> value;
 	list.push_back(value);
-	cout << "Ââåäèòå èíäåêñ äîáàâëÿåìîãî ýëåìåíòà: "; cin >> index;
-	cout << "Ââåäèòå çíà÷åíèå äîáàâëÿåìîãî ýëåìåíòà: "; cin >> value;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð½Ð´ÐµÐºÑ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°: "; cin >> index;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ Ð´Ð¾Ð±Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°: "; cin >> value;
 	list.insert(index, value);
 	list.print();
 	list.print_reverse();
@@ -375,7 +375,7 @@ void main()
 	list.pop_back();
 	list.print();
 	list.print_reverse();
-	cout << "Ââåäèòå èíäåêñ óäàâëÿåìîãî ýëåìåíòà: "; cin >> index;
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð½Ð´ÐµÐºÑ ÑƒÐ´Ð°Ð²Ð»ÑÐµÐ¼Ð¾Ð³Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°: "; cin >> index;
 	list.erase(index);
 	list.print();
 	list.print_reverse();
