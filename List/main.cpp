@@ -162,6 +162,10 @@ public:
 	{
 		return Temp->Data;
 	}
+	operator bool()const
+	{
+		return Temp;
+	}
 };
 
 class List
@@ -176,13 +180,13 @@ public:
 	}
 	List()
 	{
-		Head = Tail = nullptr;
+		Head = nullptr;
+		Tail = nullptr;
 		size = 0;
 		cout << "LConstructor:\t" << this << endl;
 	}
 	List(const initializer_list<int>& il) :List()
 	{
-		cout << typeid(il.begin()).name() << endl;
 		for (int const* it = il.begin(); it != il.end(); it++)
 			push_back(*it);
 	}
@@ -246,7 +250,11 @@ public:
 	}
 	void insert(unsigned int Index, int Data)
 	{
-		if (Index > size)return;
+		if (Index > size)
+		{
+			cout << "Error: Выход за пределы списка:" << endl;
+			return;
+		}
 		if (Index == 0)
 		{
 			push_front(Data);
@@ -258,16 +266,8 @@ public:
 			return;
 		}
 		Element* Temp;
-		if (Index < size / 2)
-		{
-			Temp = Head;
-			for (int i = 0; i < Index; i++)Temp = Temp->pNext;
-		}
-		else
-		{
-			Temp = Tail;
-			for (int i = 0; i < size - Index - 1; i++)Temp = Temp->pPrev;
-		}
+		Temp = Head;
+		for (int i = 0; i < Index; i++)Temp = Temp->pNext;
 		Temp->pPrev = Temp->pPrev->pNext = new Element(Data, Temp, Temp->pPrev);
 		size++;
 	}
@@ -316,16 +316,8 @@ public:
 		if (index >= size)return;
 
 		Element* Temp;
-		if (index < size / 2)
-		{
-			Temp = Head;
-			for (int i = 0; i < index; i++)Temp = Temp->pNext;
-		}
-		else
-		{
-			Temp = Tail;
-			for (int i = 0; i < size - index - 1; i++)Temp = Temp->pPrev;
-		}
+		Temp = Head;
+		for (int i = 0; i < index; i++)Temp = Temp->pNext;
 		Temp->pPrev->pNext = Temp->pNext;
 		Temp->pNext->pPrev = Temp->pPrev;
 		delete Temp;
@@ -361,7 +353,7 @@ void main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	/*int n;	cout << "Введите размер списка: "; cin >> n;
+	int n;	cout << "Введите размер списка: "; cin >> n;
 	List list;
 	for (int i = 0; i < n; i++) list.push_back(rand() % 100);
 	list.print();
@@ -386,9 +378,9 @@ void main()
 	cout << "Введите индекс удавляемого элемента: "; cin >> index;
 	list.erase(index);
 	list.print();
-	list.print_reverse();*/
+	list.print_reverse();
 
-	List list1 = { 34, 55, 89, 144, 233 };
+	/*List list1 = { 34, 55, 89, 144, 233 };
 	List list = { 3, 5, 8, 13, 21 };
 	list1.print();
 	for (int i : list1)
@@ -409,5 +401,5 @@ void main()
 	list.print();
 	list1.print();
 	List list3 = list + list1;
-	list3.print();
+	list3.print();*/
 }
