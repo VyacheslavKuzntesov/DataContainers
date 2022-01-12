@@ -2,12 +2,15 @@
 //#include<string.h>
 #include"ClassList.h"
 #include"ClassList.cpp"
+
+/*
 using namespace std;
 using std::cout;
 using std::cin;
 using std::endl;
+*/
 
-#define tab "\t"
+//#define tab "\t"
 
 //#define BASE_CHECK
 
