@@ -1,5 +1,10 @@
 #include"ClassList.h"
 
+
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////		  class definition (определение класса)		  /////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
+
 template<typename T>List<T>::Element::Element(T Data, Element* pNext, Element* pPrev) :Data(Data), pNext(pNext), pPrev(pPrev)
 {
 #ifdef DEBUG
@@ -352,6 +357,8 @@ template<typename T>void List<T>::reverse_print()const
 	for (Element* Temp = Tail; Temp; Temp = Temp->pPrev)cout << Temp->pPrev << tab << Temp << tab << Temp->Data << tab << Temp->pNext << endl;
 	cout << "Количество элементов списка: " << size << endl;
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 template<typename T>
 void print_list(const List<T>& list)
