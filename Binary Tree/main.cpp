@@ -28,6 +28,10 @@ protected:
 #endif // DEBUG
 
 		}
+		bool is_leaf()const
+		{
+			return pLeft == pRight;
+		}
 		friend class Tree;
 		friend class UniqueTree;
 	}*Root;
@@ -44,6 +48,13 @@ public:
 #endif // DEBUG
 
 	}
+	Tree(const Tree& other) : Tree()
+	{
+		copy(other.Root);
+#ifdef DEBUG
+		cout << "CopyConstruvtor:\t" << this << endl;
+#endif // DEBUG
+	}
 	Tree(const std::initializer_list<int>& il) :Tree()
 	{
 		for (int const* it = il.begin(); it != il.end(); it++)
@@ -58,9 +69,26 @@ public:
 		this->clear();
 	}
 
+	Tree& operator=(const Tree& other)
+	{
+		if (this == &other)return *this;
+		clear(Root);
+		copy(other.Root);
+#ifdef DEBUG
+		cout << "CopyAssigment:\t" << this << endl;
+#endif // DEBUG
+
+		return *this;
+	}
+
 	void insert(int Data)
 	{
 		insert(Data, Root);
+	}
+
+	void erase(int Data)
+	{
+		erase(Data, Root);
 	}
 
 	void print()const
@@ -124,6 +152,36 @@ private:
 		/*insert(Data, Root);*/
 	}
 
+	void erase(int Data, Element*& Root)
+	{
+		if (Root == nullptr)return;
+		erase(Data,Root->pLeft);
+		erase(Data,Root->pRight);
+		if (Data == Root->Data)
+		{
+			if (Root->is_leaf())
+			{
+				delete Root;
+				Root = nullptr;
+			}
+			else
+			{
+				if (count(Root->pLeft) < count(Root->pRight))		//Если в левой ветке элементов меньше чем в правой 
+				{
+					//то удаляемое значение подменим минимальным значением из левой ветки
+					Root->Data = minValue(Root->pRight);
+					//После чего удалим это минимальное значение из правой ветки
+					erase(minValue(Root->pRight), Root->pRight);
+				}
+				else
+				{
+					Root->Data = maxValue(Root->pLeft);
+					erase(maxValue(Root->pLeft), Root->pLeft);
+				}
+			}
+		}
+	}
+
 	void print(Element* Root)const
 	{
 		if (Root == nullptr)return;
@@ -174,6 +232,15 @@ private:
 			depth(Root->pLeft) + 1 > depth(Root->pRight) + 1? 
 			depth(Root->pLeft) + 1 : depth(Root->pRight) + 1;
 	}
+
+	void copy(Element* Root)
+	{
+		if (Root == nullptr)return;
+		insert(Root->Data, this->Root);
+		copy(Root->pLeft);
+		copy(Root->pRight);
+	}
+
 };
 
 class UniqueTree :public Tree
@@ -202,6 +269,7 @@ public:
 };
 
 //#define BASE_CHECK
+//#define COPY_METHODS_CHEK
 
 void main()
 {
@@ -238,9 +306,25 @@ void main()
 	cout << "Глубина дерева: " << u_tree.depth() << endl;
 #endif // BASE_CHECK
 
-	Tree tree = { 50,25,75,16,32,48,64,80,85,77 };
+	Tree tree = { 50,25,75,16,32,48,64,80,85,77,78 };
+	tree = tree;
 	tree.print();
 	cout << "Глубина дерева: " << tree.depth() << endl;
+
+#ifdef COPY_METHODS_CHEK
+	Tree tree2 = tree;		//CopyConstructor
+	tree2.print();
+
+	Tree tree3;
+	tree3 = tree2;			//CopyAssigment
+	tree3 = tree2;
+	tree3.print();
+#endif // COPY_METHODS_CHEK
+
+	int value;
+	cout << "Ведите удаляемое значение: "; cin >> value;
+	tree.erase(value);
+	tree.print();
 }
 
 
