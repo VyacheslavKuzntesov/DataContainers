@@ -285,6 +285,61 @@ public:
 		cout << "Количество элементов списка: " << size << endl;
 		cout << "Общее количество элементов: " << Element::count << endl;
 	}
+
+	void unique()
+	{
+		if (Head == nullptr)return;
+		int Index;
+		int Count = 1;
+		Element* Temp = Head;
+		while (Temp->pNext)
+		{
+			Index = 0;
+			Index = Count;
+			Element* Repeat = Temp;
+			while (Repeat->pNext)
+			{
+				Repeat = Repeat->pNext;
+				if(Temp->Data == Repeat->Data)
+				{
+					if (Repeat->pNext == nullptr)
+					{
+						this->pop_back();
+						break;
+					}
+					else
+					{
+						this->erase(Index);
+						Index--;
+						Repeat = Temp;
+						Index = Count;
+					}
+				}
+				Index++;
+				if (Repeat->pNext == nullptr)break;
+			}
+			if (Temp->pNext == nullptr)return;
+			Temp = Temp->pNext;
+			Count++;
+			if (Temp->pNext == nullptr)return;
+		}
+	}
+
+	void reverse()
+	{
+		if (Head == nullptr)return;
+		Element* Temp = Head;
+		Element* Next = nullptr;
+		Element* Prev = nullptr;
+		while (Temp)
+		{
+			Next = Temp->pNext;
+			Temp->pNext = Prev;
+			Prev = Temp;
+			Temp = Next;
+		}
+		Head = Prev;
+	}
 };
 
 ForwardList operator+(const ForwardList& left, const ForwardList& right)
@@ -395,7 +450,19 @@ void main()
 	cout << endl;
 #endif // RANGE_BASED_FOR_ARRAY
 
-	ForwardList list = { 3,5,8,13,21 };
+	ForwardList list = { 3,3,5,4,5,4 };
+	for (int i : list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+	list.unique();
+	for (int i : list)
+	{
+		cout << i << tab;
+	}
+	cout << endl;
+	list.reverse();
 	for (int i : list)
 	{
 		cout << i << tab;

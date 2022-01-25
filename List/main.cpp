@@ -339,6 +339,19 @@ public:
 			cout << Temp << tab << Temp->pPrev << tab << Temp->Data << tab << Temp->pNext << endl;
 		cout << "Количество элементов списка: " << size << endl;
 	}
+
+	void reverse()
+	{
+		Element* Temp = Head;
+		while (Temp != nullptr)
+		{
+			Element* Next = Temp->pNext;
+			swap(Temp->pNext, Temp->pPrev);
+			Temp = Next;
+		}
+		swap(Head, Tail);
+		swap(Head->pPrev, Tail->pNext);
+	}
 };
 
 List operator+(const List& left, const List& right)
@@ -355,7 +368,7 @@ void main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	int n;	cout << "Введите размер списка: "; cin >> n;
+	/*int n;	cout << "Введите размер списка: "; cin >> n;
 	List list;
 	for (int i = 0; i < n; i++) list.push_back(rand() % 100);
 	list.print();
@@ -380,7 +393,7 @@ void main()
 	cout << "Введите индекс удавляемого элемента: "; cin >> index;
 	list.erase(index);
 	list.print();
-	list.print_reverse();
+	list.print_reverse();*/
 
 	/*List list1 = { 34, 55, 89, 144, 233 };
 	List list = { 3, 5, 8, 13, 21 };
@@ -404,4 +417,8 @@ void main()
 	list1.print();
 	List list3 = list + list1;
 	list3.print();*/
+	List list1 = { 34, 55, 89, 144, 233 };
+	list1.print();
+	list1.reverse();
+	list1.print();
 }
