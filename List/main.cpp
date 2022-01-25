@@ -352,6 +352,45 @@ public:
 		swap(Head, Tail);
 		swap(Head->pPrev, Tail->pNext);
 	}
+
+	void unique()
+	{
+		if (Head == nullptr)return;
+		int Index;
+		int Count = 1;
+		Element* Temp = Head;
+		while (Temp->pNext)
+		{
+			Index = 0;
+			Index = Count;
+			Element* Repeat = Temp;
+			while (Repeat->pNext)
+			{
+				Repeat = Repeat->pNext;
+				if (Temp->Data == Repeat->Data)
+				{
+					if (Repeat->pNext == nullptr)
+					{
+						this->pop_back();
+						break;
+					}
+					else
+					{
+						this->erase(Index);
+						Index--;
+						Repeat = Temp;
+						Index = Count;
+					}
+				}
+				Index++;
+				if (Repeat->pNext == nullptr)break;
+			}
+			if (Temp->pNext == nullptr)return;
+			Temp = Temp->pNext;
+			Count++;
+			if (Temp->pNext == nullptr)return;
+		}
+	}
 };
 
 List operator+(const List& left, const List& right)
@@ -417,8 +456,9 @@ void main()
 	list1.print();
 	List list3 = list + list1;
 	list3.print();*/
-	List list1 = { 34, 55, 89, 144, 233 };
+	List list1 = { 34, 55,55, 89, 144, 233 ,34};
 	list1.print();
+	list1.unique();
 	list1.reverse();
 	list1.print();
 }
